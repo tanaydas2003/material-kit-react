@@ -1,43 +1,82 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
 import Grid from '@mui/material/Unstable_Grid2';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
 import { Budget } from '@/components/dashboard/overview/budget';
 import { LatestOrders } from '@/components/dashboard/overview/latest-orders';
 import { LatestProducts } from '@/components/dashboard/overview/latest-products';
-import { Sales } from '@/components/dashboard/overview/sales';
 import { TasksProgress } from '@/components/dashboard/overview/tasks-progress';
 import { TotalCustomers } from '@/components/dashboard/overview/total-customers';
-import { TotalProfit } from '@/components/dashboard/overview/total-profit';
 import { Traffic } from '@/components/dashboard/overview/traffic';
+import HeadingBox from '@/components/dashboard/layout/headingbox';
+import { TrendCard } from '@/components/dashboard/layout/cards';
 
 export const metadata = { title: `Overview | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 export default function Page(): React.JSX.Element {
   return (
     <Grid container spacing={3}>
-      <Grid lg={3} sm={6} xs={12}>
+      <Grid xs={12}>
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{ fontFamily: 'Albert Sans, sans-serif', fontWeight: 'bold' }}
+        >
+          Hello Nish,
+        </Typography>
+        <Typography
+          variant="body1"
+          component="div"
+          sx={{ fontFamily: 'Albert Sans, sans-serif', mt: 1 }}
+        >
+          Good Afternoon,
+        </Typography>
+      </Grid>
+      <Grid xs={12} md={12}>
+        <HeadingBox />
+      </Grid>
+      <Grid lg={4} sm={6} xs={12}>
         <Budget diff={12} trend="up" sx={{ height: '100%' }} value="$24k" />
       </Grid>
-      <Grid lg={3} sm={6} xs={12}>
+      <Grid lg={4} sm={6} xs={12}>
         <TotalCustomers diff={16} trend="down" sx={{ height: '100%' }} value="1.6k" />
       </Grid>
-      <Grid lg={3} sm={6} xs={12}>
+      <Grid lg={4} sm={6} xs={12}>
         <TasksProgress sx={{ height: '100%' }} value={75.5} />
       </Grid>
-      <Grid lg={3} sm={6} xs={12}>
-        <TotalProfit sx={{ height: '100%' }} value="$15k" />
+      <Grid xs={12}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent={{ xs: 'center', md: 'flex-start' }}
+          sx={{ mb: 2, gap: 2 }}
+        >
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ fontFamily: 'Albert Sans, sans-serif', color: 'black', fontWeight: 'bold' }}
+          >
+            Recent Files
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ fontFamily: 'Albert Sans, sans-serif', color: '#5726BF', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            See All
+          </Typography>
+        </Stack>
       </Grid>
-      <Grid lg={8} xs={12}>
-        <Sales
-          chartSeries={[
-            { name: 'This year', data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20] },
-            { name: 'Last year', data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13] },
-          ]}
-          sx={{ height: '100%' }}
-        />
+      <Grid container spacing={3} justifyContent={{ xs: 'center', md: 'flex-start' }}>
+        {[...Array(5)].map((_, index) => (
+          <Grid key={index} lg={2.4} md={2.4} sm={4} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <TrendCard />
+          </Grid>
+        ))}
       </Grid>
       <Grid lg={4} md={6} xs={12}>
         <Traffic chartSeries={[63, 15, 22]} labels={['Desktop', 'Tablet', 'Phone']} sx={{ height: '100%' }} />

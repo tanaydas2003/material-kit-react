@@ -5,49 +5,54 @@ import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import type { SxProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { ArrowDown as ArrowDownIcon } from '@phosphor-icons/react/dist/ssr/ArrowDown';
-import { ArrowUp as ArrowUpIcon } from '@phosphor-icons/react/dist/ssr/ArrowUp';
-import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 
-export interface TotalCustomersProps {
+export interface BudgetProps {
   diff?: number;
   trend: 'up' | 'down';
   sx?: SxProps;
   value: string;
 }
 
-export function TotalCustomers({ diff, trend, sx, value }: TotalCustomersProps): React.JSX.Element {
-  const TrendIcon = trend === 'up' ? ArrowUpIcon : ArrowDownIcon;
-  const trendColor = trend === 'up' ? 'var(--mui-palette-success-main)' : 'var(--mui-palette-error-main)';
-
+export function TotalCustomers({ value }: BudgetProps): React.JSX.Element {
   return (
-    <Card sx={sx}>
+    <Card
+      sx={{
+        width: '340px',
+        height: '130px',
+        borderRadius: '20px',
+        backgroundColor: '#BBAACC',
+      }}
+    >
       <CardContent>
-        <Stack spacing={2}>
-          <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
-            <Stack spacing={1}>
-              <Typography color="text.secondary" variant="overline">
-                Total Customers
-              </Typography>
-              <Typography variant="h4">{value}</Typography>
-            </Stack>
-            <Avatar sx={{ backgroundColor: 'var(--mui-palette-success-main)', height: '56px', width: '56px' }}>
-              <UsersIcon fontSize="var(--icon-fontSize-lg)" />
+        <Stack direction="row" spacing={3} alignItems="center">
+          <Avatar
+            sx={{
+              backgroundColor: '#A597B2',
+              borderRadius: '10px',
+              height: '56px',
+              width: '56px',
+            }}
+          >
+            <Avatar
+              sx={{
+                backgroundColor: '#BBAACC',
+                border: '1px solid black',
+                borderRadius: '6px',
+                height: '36px',
+                width: '36px',
+              }}
+            >
+              <MusicNoteOutlinedIcon sx={{ width: '30px', height: '30px', color: 'black' }} />
             </Avatar>
+          </Avatar>
+          <Stack spacing={1}>
+            <Typography color="text.secondary">
+              Budget
+            </Typography>
+            <Typography variant="h4">10</Typography>
           </Stack>
-          {diff ? (
-            <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-              <Stack sx={{ alignItems: 'center' }} direction="row" spacing={0.5}>
-                <TrendIcon color={trendColor} fontSize="var(--icon-fontSize-md)" />
-                <Typography color={trendColor} variant="body2">
-                  {diff}%
-                </Typography>
-              </Stack>
-              <Typography color="text.secondary" variant="caption">
-                Since last month
-              </Typography>
-            </Stack>
-          ) : null}
         </Stack>
       </CardContent>
     </Card>
